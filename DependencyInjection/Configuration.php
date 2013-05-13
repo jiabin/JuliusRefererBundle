@@ -29,11 +29,11 @@ class Configuration implements ConfigurationInterface
                     ->thenInvalid('Invalid database driver "%s"')
                 ->end()
             ->end()
-            ->arrayNode('listener')
-                ->children()
-                    ->scalarNode('insert')->defaultValue(false)->end()
-                    ->scalarNode('update')->defaultValue(false)->end()
-                ->end()
+            ->scalarNode('field')
+                ->defaultValue('ref')
+            ->end()
+            ->booleanNode('listener')
+                ->defaultFalse()
             ->end();
 
         return $treeBuilder;

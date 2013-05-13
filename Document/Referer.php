@@ -2,7 +2,10 @@
 
 namespace Julius\RefererBundle\Document;
 
+use Gedmo\Mapping\Annotation as Gedmo;
+use Julius\RefererBundle\Model\Referer as BaseReferer;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Julius\RefererBundle\Document\Referer
@@ -10,7 +13,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
  * @ODM\Document
  * @ODM\ChangeTrackingPolicy("DEFERRED_IMPLICIT")
  */
-class Referer
+class Referer extends BaseReferer
 {
     /**
      * @var MongoId $id
@@ -25,6 +28,14 @@ class Referer
      * @ODM\Field(name="name", type="string")
      */
     protected $name;
+
+    /**
+     * @var string $slug
+     *
+     * @ODM\Field(name="slug", type="string")
+     * @Gedmo\Slug(fields={"name"}, updatable=false, unique=true, separator="-")
+     */
+    protected $slug;
 
     /**
      * @var collection $conditions
@@ -43,7 +54,9 @@ class Referer
     /**
      * @var date $createdAt
      *
-     * @ODM\Field(name="createdAt", type="date")
+     * @ODM\Date()
+     * @Gedmo\Timestampable(on="create")
+     * @Assert\Date()
      */
     protected $createdAt;
 
@@ -57,7 +70,9 @@ class Referer
     /**
      * @var date $updatedAt
      *
-     * @ODM\Field(name="updatedAt", type="date")
+     * @ODM\Date()
+     * @Gedmo\Timestampable(on="update")
+     * @Assert\Date()
      */
     protected $updatedAt;
 
@@ -103,6 +118,28 @@ class Referer
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return \Content
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string $slug
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 
     /**

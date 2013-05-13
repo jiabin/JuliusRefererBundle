@@ -26,12 +26,10 @@ class JuliusRefererExtension extends Extension
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
 
-        if ($config['listener']['insert']) {
-            $loader->load('listener/'.$config['db_driver'].'/insert.xml');
+        if ($config['listener']) {
+            $loader->load('listener/'.$config['db_driver'].'.xml');
         }
 
-        if ($config['listener']['update']) {
-            $loader->load('listener/'.$config['db_driver'].'/update.xml');
-        }
+        $container->setParameter('julius_referer.field', $config['field']);
     }
 }

@@ -21,4 +21,19 @@ interface ReferredInterface
      * @return string $referer
      */
     public function getReferer();
+
+    /**
+     * Set isReferable
+     *
+     * @param  bool $isReferable
+     * @return ReferredInterface
+     */
+    public function setIsReferable($isReferable);
+
+    /**
+     * Get isReferable
+     *
+     * @return bool $isReferable
+     */
+    public function getIsReferable();
 }
