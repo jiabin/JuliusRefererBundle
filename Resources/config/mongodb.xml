@@ -5,15 +5,10 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="julius_referer.referer_doctrine_listener.class">Julius\RefererBundle\Doctrine\ODM\RefererDoctrineListener</parameter>
         <parameter key="julius_referer.referer.class">Julius\RefererBundle\Document\Referer</parameter>
     </parameters>
 
     <services>
-        <!-- Doctrine listener -->
-        <service id="julius_referer.doctrine_listener" class="%julius_referer.referer_doctrine_listener.class%">
-            <tag name="doctrine_mongodb.odm.event_listener" event="prePersist" />
-        </service>
         <!-- Referer manager -->
         <service id="julius_referer.referer_manager" class="%julius_referer.referer_manager.class%">
             <argument type="service" id="session" />
