@@ -1,0 +1,31 @@
+{
+    "name":        "jiabin/referer-bundle",
+    "type":        "symfony-bundle",
+    "description": "Julius referer manager",
+    "keywords":    ["julius", "referer", "http"],
+    "homepage":    "https://github.com/jiabin/JuliusRefererBundle",
+    "license":     "MIT",
+    "authors": [
+        {
+            "name": "Eymen Gunay",
+            "email": "eymen@egunay.com"
+        }
+    ],
+    "require": {
+        "symfony/symfony": ">=2.1,<2.3-dev"
+    },
+    "suggest": {
+        "cedriclombardot/admingenerator-generator-bundle": "dev-master",
+    },
+    "target-dir": "Julius/RefererBundle",
+    "autoload": {
+        "psr-0": {
+            "Julius\\RefererBundle": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}

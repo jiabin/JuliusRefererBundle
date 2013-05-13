@@ -1,0 +1,11 @@
+referer:
+    menu:
+        title: Referer
+    list:
+        title: Referers list
+    new:
+        title: New referer
+    edit:
+        title.%object%: "You are editing %object%"
+    show:
+        title.%object%: "You are viewing %object%"
