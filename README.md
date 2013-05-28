@@ -1,5 +1,7 @@
 # JuliusRefererBundle
 
+[![Dependencies Status](https://d2xishtp1ojlk0.cloudfront.net/d/10022099)](http://depending.in/jiabin/JuliusRefererBundle)
+
 JuliusRefererBundle offers a simple prototype to help track visitor referers, save them in database and retrieve for future usage.
 
 Currently it only supports MongoDB (although adding ORM should be fairly simple) and requires at least **Symfony 2.1**
