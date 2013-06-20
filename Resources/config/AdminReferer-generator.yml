@@ -66,4 +66,9 @@ builders:
             actions:
                 list: ~
                 new: ~
-    delete: ~
+    actions:
+        params:
+          object_actions:
+              delete: ~
+          batch_actions:
+              delete: ~
