@@ -39,18 +39,17 @@ class RefererListener
     {
         $request = $event->getRequest();
         $session = $request->getSession();
-        $referers = $session->get($this->sessionKey);
+        $referer = $session->get($this->sessionKey);
 
-        if ($referers) return true;
+        if ($referer) return true;
+        $referer = Referer::NONE;
 
         if ($request->get($this->field)) {
-            $matches = $this->matcher->matchMulti($request, $this->field) ?: array();
-            foreach ($matches as $match) {
-                $referers[] = $match->getId();
+            $match = $this->matcher->match($request, $this->field);
+            if ($match) {
+                $referer = $match->getId();
             }
-        } else {
-            $referers = array(Referer::NONE);
         }
-        $session->set($this->sessionKey, $referers);
+        $session->set($this->sessionKey, $referer);
     }
 }

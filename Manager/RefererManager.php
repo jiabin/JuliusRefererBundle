@@ -64,17 +64,12 @@ class RefererManager
      */
     public function getCurrent()
     {
-        $refererIds = $this->session->get($this->sessionKey);
-        if ($refererIds) {
-            $referers = array();
-            $repo = $this->getRepository();
-            foreach ($refererIds as $refererId) {
-                $referer = $repo->findOneById($refererId);
-                if ($referer) {
-                    $referers[] = $referer;
-                }
+        $refererId = $this->session->get($this->sessionKey);
+        if ($refererId) {
+            $referer = $repo->findOneById($refererId);
+            if ($referer) {
+                return $referer;
             }
-            return $referers;
         }
         return null;
     }

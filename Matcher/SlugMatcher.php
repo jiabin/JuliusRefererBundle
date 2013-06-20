@@ -14,7 +14,7 @@ namespace Julius\RefererBundle\Matcher;
 use Symfony\Component\HttpFoundation\Request;
 use Julius\RefererBundle\Manager\RefererManager;
 
-class SlugMatcher
+class SlugMatcher implements MatcherInterface
 {
     /**
      * @var RefererManager
@@ -36,11 +36,10 @@ class SlugMatcher
      * @param  string $field Referer field name
      * @return array
      */
-    public function matchMulti(Request $request, $field)
+    public function match(Request $request, $field)
     {
-        $slug = $request->get($field);
-        $repo = $this->manager->getRepository();
-        $matches = $repo->findBySlug($slug);
-        return $matches;
+        $slug  = $request->get($field);
+        $repo  = $this->manager->getRepository();
+        return $repo->findOneBySlug($slug);
     }
 }
