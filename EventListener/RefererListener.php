@@ -59,9 +59,7 @@ class RefererListener
     {
         $request = $event->getRequest();
         $session = $request->getSession();
-        //$session->remove($this->sessionKey);
         $referer = $session->get($this->sessionKey);
-        print_r($referer);
 
         if (is_array($referer)) {
             // Referer for this session is already calculated.
