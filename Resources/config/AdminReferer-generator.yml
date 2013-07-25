@@ -7,14 +7,6 @@ params:
         slug:
             addFormOptions:
                 required: false
-        conditions:
-            formType: collection
-            formOptions:
-                type: \Julius\RefererBundle\Form\Type\ConditionType
-                required: false
-                allow_add: true
-                allow_delete: true
-                widget: fieldset
 
 builders:
     list:
@@ -24,7 +16,6 @@ builders:
                 - name
                 - slug
                 - createdAt
-                - updatedAt
             actions:
                 new: ~
             object_actions:
@@ -36,7 +27,6 @@ builders:
                 - name
                 - slug
                 - createdAt
-                - updatedAt
     new:
         params:
             title: New object for RefererBundle
@@ -62,7 +52,6 @@ builders:
                 - name
                 - slug
                 - createdAt
-                - updatedAt
             actions:
                 list: ~
                 new: ~

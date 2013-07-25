@@ -11,10 +11,11 @@
 
 namespace Julius\RefererBundle\EventListener;
 
+use Julius\RefererBundle\Model\Referer;
+use Julius\RefererBundle\Matcher\MatcherInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
-use Julius\RefererBundle\Model\Referer;
 
 class RefererListener
 {
@@ -28,28 +29,52 @@ class RefererListener
      */
     protected $field;
 
-    public function __construct($matcher, $sessionKey, $field)
+    /**
+     * @var array
+     */
+    protected $matchers;
+
+    /**
+     * Class constructor
+     *
+     * @param string $sessionKey
+     */
+    public function __construct($sessionKey)
     {
-        $this->matcher = $matcher;
         $this->sessionKey = $sessionKey;
-        $this->field = $field;
+        $this->matchers = array();
+    }
+
+    public function addMatcher(MatcherInterface $matcher)
+    {
+        $this->matchers[] = $matcher;
+    }
+
+    public function getMatchers()
+    {
+        return $this->matchers;
     }
 
     public function onRequest(GetResponseEvent $event)
     {
         $request = $event->getRequest();
         $session = $request->getSession();
+        //$session->remove($this->sessionKey);
         $referer = $session->get($this->sessionKey);
+        print_r($referer);
 
-        if ($referer) return true;
-        $referer = Referer::NONE;
+        if (is_array($referer)) {
+            // Referer for this session is already calculated.
+            return true;
+        }
 
-        if ($request->get($this->field)) {
-            $match = $this->matcher->match($request, $this->field);
-            if ($match) {
-                $referer = $match->getId();
+        $matches = array();
+        foreach ($this->matchers as $matcher) {
+            if ($match = $matcher->match($request)) {
+                // Store only referer id
+                $matches[] = $match->getId();
             }
         }
-        $session->set($this->sessionKey, $referer);
+        $session->set($this->sessionKey, $matches);
     }
 }

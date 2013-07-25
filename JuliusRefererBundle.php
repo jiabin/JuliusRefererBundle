@@ -12,7 +12,14 @@
 namespace Julius\RefererBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Julius\RefererBundle\DependencyInjection\Compiler\MatcherCompilerPass;
 
 class JuliusRefererBundle extends Bundle
 {
+    public function build(ContainerBuilder $container)
+    {
+    	parent::build($container);
+        $container->addCompilerPass(new MatcherCompilerPass);
+    }
 }

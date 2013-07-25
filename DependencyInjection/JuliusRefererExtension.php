@@ -34,12 +34,9 @@ class JuliusRefererExtension extends Extension
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
-
-        if ($config['doctrine_listener']) {
-            $loader->load('doctrine/'.$config['db_driver'].'.xml');
-        }
         $loader->load($config['db_driver'] . '.xml');
 
         $container->setParameter('julius_referer.field', $config['field']);
+        $container->setParameter('julius_referer.doctrine_listener_enabled', $config['doctrine_listener_enabled']);
     }
 }

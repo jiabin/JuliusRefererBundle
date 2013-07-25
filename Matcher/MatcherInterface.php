@@ -17,10 +17,9 @@ interface MatcherInterface
 {
     /**
      * Match referer
-     * 
+     *
      * @param  Request $request
-     * @param  string  $field   Referer field name
-     * @return string
+     * @return RefererInterface
      */
-    public function match(Request $request, $field);
+    public function match(Request $request);
 }

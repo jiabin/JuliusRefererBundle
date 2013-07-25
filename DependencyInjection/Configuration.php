@@ -41,7 +41,7 @@ class Configuration implements ConfigurationInterface
             ->scalarNode('field')
                 ->defaultValue('ref')
             ->end()
-            ->booleanNode('doctrine_listener')
+            ->booleanNode('doctrine_listener_enabled')
                 ->defaultFalse()
             ->end();
 

@@ -6,15 +6,22 @@
 
     <parameters>
         <parameter key="julius_referer.referer.class">Julius\RefererBundle\Document\Referer</parameter>
+        <parameter key="julius_referer.referer_doctrine_listener.class">Julius\RefererBundle\Doctrine\ODM\RefererDoctrineListener</parameter>
     </parameters>
 
     <services>
         <!-- Referer manager -->
         <service id="julius_referer.referer_manager" class="%julius_referer.referer_manager.class%">
-            <argument type="service" id="session" />
-            <argument type="service" id="doctrine.odm.mongodb.document_manager" />
+            <argument type="service" id="service_container" />
+            <argument>doctrine_mongodb.odm.document_manager</argument>
             <argument>%julius_referer.referer.class%</argument>
             <argument>%julius_referer.session_key%</argument>
+        </service>
+        <!-- Doctrine listener -->
+        <service id="julius_referer.doctrine_listener" class="%julius_referer.referer_doctrine_listener.class%">
+            <argument type="service" id="julius_referer.referer_manager" />
+            <argument>%julius_referer.doctrine_listener_enabled%</argument>
+            <tag name="doctrine_mongodb.odm.event_listener" event="prePersist" />
         </service>
     </services>
 </container>

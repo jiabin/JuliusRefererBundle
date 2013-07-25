@@ -7,21 +7,21 @@
     <parameters>
         <parameter key="julius_referer.referer_listener.class">Julius\RefererBundle\EventListener\RefererListener</parameter>
         <parameter key="julius_referer.session_key">julius_referer</parameter>
-        <parameter key="julius_referer.slug_matcher.class">Julius\RefererBundle\Matcher\SlugMatcher</parameter>
+        <parameter key="julius_referer.default_matcher.class">Julius\RefererBundle\Matcher\DefaultMatcher</parameter>
         <parameter key="julius_referer.referer_manager.class">Julius\RefererBundle\Manager\RefererManager</parameter>
     </parameters>
 
     <services>
         <!-- Referer listener -->
         <service id="julius_referer.referer_listener" class="%julius_referer.referer_listener.class%">
-            <argument type="service" id="julius_referer.slug_matcher" />
             <argument>%julius_referer.session_key%</argument>
-            <argument>%julius_referer.field%</argument>
             <tag name="kernel.event_listener" event="kernel.request" method="onRequest" />
         </service>
-        <!-- Slug matcher -->
-        <service id="julius_referer.slug_matcher" class="%julius_referer.slug_matcher.class%">
+        <!-- Default matcher -->
+        <service id="julius_referer.default_matcher" class="%julius_referer.default_matcher.class%">
             <argument type="service" id="julius_referer.referer_manager" />
+            <argument>%julius_referer.field%</argument>
+            <tag name="julius_referer.matcher" />
         </service>
     </services>
 </container>

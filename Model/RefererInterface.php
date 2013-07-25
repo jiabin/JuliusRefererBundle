@@ -16,6 +16,8 @@ namespace Julius\RefererBundle\Model;
  */
 interface RefererInterface
 {
+    const NONE = 'none';
+
     /**
      * Get id
      *

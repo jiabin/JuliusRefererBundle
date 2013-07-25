@@ -11,25 +11,25 @@
 
 namespace Julius\RefererBundle\Manager;
 
-use Symfony\Component\HttpFoundation\Session\Session;
-use Doctrine\Common\Persistence\ObjectManager;
+use Julius\RefererBundle\Model\RefererInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class RefererManager
 {
     /**
-     * @var Session $session
+     * @var ContainerInterface $container
      */
-    protected $session;
+    protected $container;
+
+    /**
+     * @var string
+     */
+    protected $objectManagerServiceId;
 
     /**
      * @var string $sessionKey
      */
     protected $sessionKey;
-
-    /**
-     * @var ObjectManager
-     */
-    protected $om;
 
     /**
      * @var string
@@ -39,38 +39,52 @@ class RefererManager
     /**
      * Class construct
      */
-    public function __construct(Session $session, ObjectManager $om, $class, $sessionKey)
+    public function __construct(ContainerInterface $container, $objectManagerServiceId, $class, $sessionKey)
     {
-        $this->session = $session;
-        $this->om = $om;
+        $this->container = $container;
+        $this->objectManagerServiceId = $objectManagerServiceId;
         $this->class = $class;
         $this->sessionKey = $sessionKey;
     }
 
+    public function getObjectManager()
+    {
+        return $this->container->get($this->objectManagerServiceId);
+    }
+
     /**
      * Get object repository for referer class
-     * 
+     *
      * @return ObjectManager
      */
     public function getRepository()
     {
-        return $this->om->getRepository($this->class);
+        return $this->getObjectManager()->getRepository($this->class);
     }
 
     /**
      * Returns current referers
-     * 
-     * @return array An array of RefererInterface objects
+     *
+     * @return array Multiple RefererInterface objects
      */
-    public function getCurrent()
+    public function getCurrentReferers()
     {
-        $refererId = $this->session->get($this->sessionKey);
-        if ($refererId) {
-            $referer = $repo->findOneById($refererId);
-            if ($referer) {
-                return $referer;
-            }
+        $referers = $this->session->get($this->sessionKey);
+
+        // Return null if no matching referers found.
+        if (empty($referers)) {
+            return null;
         }
-        return null;
+
+        // Otherwise loop through all referers
+        $currentReferers = array();
+        foreach ($referers as $referer) {
+            $referer = $this->getRepository()->findOneById($referer);
+            if (is_null($referer)) {
+                throw new \Exception(sprintf("Referer not found"));
+            }
+            $currentReferers[] = $referer;
+        }
+        return $currentReferers;
     }
 }
