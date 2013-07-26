@@ -42,7 +42,7 @@ class Configuration implements ConfigurationInterface
                 ->defaultValue('ref')
             ->end()
             ->booleanNode('doctrine_listener_enabled')
-                ->defaultFalse()
+                ->defaultTrue()
             ->end();
 
         return $treeBuilder;
