@@ -16,35 +16,35 @@ use Julius\RefererBundle\Manager\RefererManager;
 
 class RefererDoctrineListener
 {
-	/**
-	 * @var RefererManager $manager
-	 */
-	protected $manager;
+    /**
+     * @var RefererManager $manager
+     */
+    protected $manager;
 
     /**
      * @var bool $enabled
      */
     protected $enabled;
 
-	/**
-	 * Class constructor
-	 */
-	public function __construct(RefererManager $manager, $enabled)
-	{
-		$this->manager = $manager;
+    /**
+     * Class constructor
+     */
+    public function __construct(RefererManager $manager, $enabled)
+    {
+        $this->manager = $manager;
         $this->enabled = $enabled;
-	}
+    }
 
     public function prePersist(\Doctrine\ODM\MongoDB\Event\LifecycleEventArgs $eventArgs)
     {
-        if ($this->enabled) {
+        if ($this->enabled && php_sapi_name() != 'cli') {
             $document = $eventArgs->getDocument();
             if ($document instanceof ReferableInterface) {
-            	// Get current referers
-            	foreach ($this->manager->getCurrentReferers() as $referer)
-            	{
-            		$document->addReferer($referer);
-            	}
+                // Get current referers
+                foreach ($this->manager->getCurrentReferers() as $referer)
+                {
+                    $document->addReferer($referer);
+                }
             }
         }
     }
