@@ -11,7 +11,7 @@
 
 namespace Julius\RefererBundle\Doctrine\ODM;
 
-use Julius\RefererBundle\Document\ReferableInterface;
+use Julius\RefererBundle\Model\ReferableInterface;
 use Julius\RefererBundle\Manager\RefererManager;
 
 class RefererDoctrineListener

@@ -69,7 +69,8 @@ class RefererManager
      */
     public function getCurrentReferers()
     {
-        $referers = $this->session->get($this->sessionKey);
+        $session = $this->container->get('session');
+        $referers = $session->get($this->sessionKey);
 
         // Return null if no matching referers found.
         if (empty($referers)) {
