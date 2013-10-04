@@ -39,10 +39,9 @@ class RefererDoctrineListener
     {
         if ($this->enabled && php_sapi_name() != 'cli') {
             $document = $eventArgs->getDocument();
-            if ($document instanceof ReferableInterface) {
+            if ($document instanceof ReferableInterface && $referers = $this->manager->getCurrentReferers()) {
                 // Get current referers
-                foreach ($this->manager->getCurrentReferers() as $referer)
-                {
+                foreach ($referers as $referer) {
                     $document->addReferer($referer);
                 }
             }
