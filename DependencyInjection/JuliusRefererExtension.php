@@ -31,10 +31,16 @@ class JuliusRefererExtension extends Extension
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
+        $bundles = $container->getParameter('kernel.bundles');
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
         $loader->load($config['db_driver'] . '.xml');
+
+        // SonataAdminBundle integration
+        if (isset($bundles['SonataAdminBundle'])) {
+            $loader->load('admin.xml');   
+        }
 
         $container->setParameter('julius_referer.field', $config['field']);
         $container->setParameter('julius_referer.doctrine_listener_enabled', $config['doctrine_listener_enabled']);
