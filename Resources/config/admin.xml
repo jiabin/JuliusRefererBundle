@@ -12,7 +12,6 @@
         <service id="julius_referer.admin" class="%julius_referer.referer_admin.class%">
             <tag name="sonata.admin" manager_type="doctrine_mongodb" group="referer" label="referer"/>
             <argument />
-            <argument>%julius_referer.referer_admin.class%</argument>
             <argument>%julius_referer.referer.class%</argument>
             <argument>SonataAdminBundle:CRUD</argument>
             <call method="setTranslationDomain">

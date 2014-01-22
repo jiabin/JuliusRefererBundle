@@ -48,6 +48,11 @@ abstract class Referer implements RefererInterface
         $this->createdAt = new DateTime();
     }
 
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
     /**
      * Get id
      *
