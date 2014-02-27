@@ -77,7 +77,9 @@ class RefererDoctrineListener
         if ($document instanceof ReferableInterface && $referers = $this->manager->getCurrentReferers()) {
             // Get current referers
             foreach ($referers as $referer) {
-                $document->addReferer($referer);
+                if (!$document->hasReferer($referer)) {
+                    $document->addReferer($referer);
+                }
             }
         }
     }
