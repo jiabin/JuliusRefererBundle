@@ -20,8 +20,10 @@
         <!-- Doctrine listener -->
         <service id="julius_referer.doctrine_listener" class="%julius_referer.referer_doctrine_listener.class%">
             <argument type="service" id="julius_referer.referer_manager" />
-            <argument>%julius_referer.doctrine_listener_enabled%</argument>
+            <argument>%julius_referer.listeners.persist%</argument>
+            <argument>%julius_referer.listeners.update%</argument>
             <tag name="doctrine_mongodb.odm.event_listener" event="prePersist" />
+            <tag name="doctrine_mongodb.odm.event_listener" event="preUpdate" />
         </service>
     </services>
 </container>

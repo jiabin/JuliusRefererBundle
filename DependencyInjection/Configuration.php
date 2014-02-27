@@ -41,8 +41,9 @@ class Configuration implements ConfigurationInterface
             ->scalarNode('field')
                 ->defaultValue('ref')
             ->end()
-            ->booleanNode('doctrine_listener_enabled')
-                ->defaultTrue()
+            ->arrayNode('listeners')
+                ->booleanNode('persist')->defaultTrue()->end()
+                ->booleanNode('update')->defaultTrue()->end()
             ->end();
 
         return $treeBuilder;
