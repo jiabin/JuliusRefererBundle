@@ -42,8 +42,10 @@ class Configuration implements ConfigurationInterface
                 ->defaultValue('ref')
             ->end()
             ->arrayNode('listeners')
-                ->booleanNode('persist')->defaultTrue()->end()
-                ->booleanNode('update')->defaultTrue()->end()
+                ->children()
+                    ->booleanNode('persist')->defaultTrue()->end()
+                    ->booleanNode('update')->defaultTrue()->end()
+                ->end()
             ->end();
 
         return $treeBuilder;
