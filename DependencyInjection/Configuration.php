@@ -42,6 +42,7 @@ class Configuration implements ConfigurationInterface
                 ->defaultValue('ref')
             ->end()
             ->arrayNode('listeners')
+                ->addDefaultsIfNotSet()
                 ->children()
                     ->booleanNode('persist')->defaultTrue()->end()
                     ->booleanNode('update')->defaultTrue()->end()

@@ -43,6 +43,7 @@ class JuliusRefererExtension extends Extension
         }
 
         $container->setParameter('julius_referer.field', $config['field']);
-        $container->setParameter('julius_referer.doctrine_listener_enabled', $config['doctrine_listener_enabled']);
+        $container->setParameter('julius_referer.listeners.persist', $config['listeners']['persist']);
+        $container->setParameter('julius_referer.listeners.update', $config['listeners']['update']);
     }
 }
