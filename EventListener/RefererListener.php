@@ -59,6 +59,9 @@ class RefererListener
     {
         $request = $event->getRequest();
         $session = $request->getSession();
+        if (!$session) {
+            return false;
+        }
         $referer = $session->get($this->sessionKey);
 
         if (is_array($referer)) {
