@@ -63,6 +63,19 @@ $manager = $this->get('julius_referer.referer_manager');
 $referers = $manager->getCurrent(); // Will return an array of RefererInterface objects
 ```
 
+## SonataAdmin  support
+
+This bundle supports [SonataAdminBundle](http://sonata-project.org/bundles/admin/master/doc/index.html). It will detect automatically sonata admin bundle and add a new item in your side menu. You can override this admin class by changing the value of `julius_referer.referer_admin.class` parameter in your configuration.
+
+Here is an example:
+```
+# app/config/config.yml
+...
+# Parameters
+parameters:
+    julius_referer.referer_admin.class: Acme\DemoBundle\Admin\RefererAdmin
+```
+
 ## AdmingeneratorGeneratorBundle support
 
 This bundle supports [AdmingeneratorGeneratorBundle](http://symfony2admingenerator.org/). See generator file for more information:
