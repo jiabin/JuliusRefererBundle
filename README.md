@@ -6,6 +6,8 @@ JuliusRefererBundle offers a simple prototype to help track visitor referers, sa
 
 Currently it only supports MongoDB (although adding ORM should be fairly simple) and requires at least **Symfony 2.1**
 
+This bundle supports both [SonataAdmin](http://sonata-project.org/bundles/admin/master/doc/index.html) and [AdmingeneratorGenerator](http://symfony2admingenerator.org/) admin generators. You can find more information in documentation.
+
 ## Documentation
 
 The bulk of the documentation is stored in the `Resources/doc/index.md` file in this bundle:
