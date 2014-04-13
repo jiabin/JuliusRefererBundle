@@ -32,7 +32,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
             ->scalarNode('db_driver')
-                ->isRequired()
+                ->defaultValue('mongodb')
                 ->validate()
                 ->ifNotInArray(array('mongodb'))
                     ->thenInvalid('Invalid database driver "%s"')
