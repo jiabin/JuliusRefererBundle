@@ -1,7 +1,6 @@
 # JuliusRefererBundle
 
 [![Latest Stable Version](https://poser.pugx.org/jiabin/julius-referer-bundle/v/stable.png)](https://packagist.org/packages/jiabin/julius-referer-bundle)
-[![Dependencies Status](https://d2xishtp1ojlk0.cloudfront.net/d/10022099)](http://depending.in/jiabin/JuliusRefererBundle)
 [![Total Downloads](https://poser.pugx.org/jiabin/julius-referer-bundle/downloads.png)](https://packagist.org/packages/jiabin/julius-referer-bundle)
 
 JuliusRefererBundle offers a simple prototype to help track visitor referers, save them in database and retrieve for future usage.
